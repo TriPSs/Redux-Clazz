@@ -51,7 +51,7 @@ import ReduxClazz from 'redux-clazz'
 
 export default class OrdinaryClass extends ReduxClazz {
   
-  // All actions and props are avaible in here
+  // All actions and props are available in here
   props
   
   constructor(...props) {
