@@ -1,0 +1,7 @@
+node_modules
+.idea
+index.js
+ReduxClazz.js
+StoreCreator.js
+
+!src/*

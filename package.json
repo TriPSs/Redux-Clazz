@@ -1,0 +1,28 @@
+{
+  "name": "redux-clazz",
+  "version": "1.0.1",
+  "description": "Connect ordinary classes to Redux",
+  "keywords": [
+    "redux"
+  ],
+  "homepage": "https://github.com/TriPSs/redux-clazz",
+  "bugs": {
+    "url": "https://github.com/TriPss/redux-clazz/issues"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Tycho Bokdam",
+    "email": "t.bokdam@seronaris.nl"
+  },
+  "main": "./index.js",
+  "scripts": {
+    "build": "babel src -d ./",
+    "prepublish": "npm run build"
+  },
+  "dependencies": {
+    "redux": "^3.7.1"
+  },
+  "devDependencies": {
+    "babel": "5.8.34"
+  }
+}
