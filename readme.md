@@ -34,8 +34,8 @@ The class container:
 import { connect } from 'redux-clazz'
 import OrdinaryClass from './OrdinaryClass'
 
-import * as Actions from './PlayerActions'
-import * as Selectors from './PlayerSelectors'
+import * as Actions from './Actions'
+import * as Selectors from './Selectors'
 
 export const mapStateToProps = state => ({
   ordinaryProp: Selectors.getOrdinaryProp(state),
