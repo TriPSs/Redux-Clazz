@@ -1,4 +1,5 @@
 import { createStore as createReduxStore, bindActionCreators } from 'redux'
+import ReduxClazz from './ReduxClazz'
 
 class Store {
 
@@ -21,20 +22,20 @@ class Store {
   }
 
   connect = (mapStateToProps, mapDispatchToProps) => {
-    return (ReduxClazz) => {
-      const props   = mapStateToProps(this.getState())
+    return (Clazz) => {
+      const props   = mapStateToProps !== null ? mapStateToProps(this.getState()) : {}
       const actions = bindActionCreators(mapDispatchToProps, this.store.dispatch)
 
-      const clazz = new ReduxClazz({
+      const clazz = new Clazz({
         ...actions,
         ...props,
       }, () => this.removeListener(clazz.constructor.name))
 
       this.listeners.push({
-        clazz       : clazz.constructor.name,
-        receiveProps: clazz.receiveProps,
+        clazz          : clazz.constructor.name,
+        receiveProps   : clazz.receiveProps,
+        mapStateToProps: mapStateToProps !== null ? mapStateToProps : () => {},
         props,
-        mapStateToProps,
       })
 
       return clazz

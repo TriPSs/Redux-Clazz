@@ -1,0 +1,8 @@
+deploy:
+  provider: npm
+  email: t.bokdam@seronaris.nl
+  api_key:
+    secure: oLPymOD9FPrMt0HNqaMLhEg8SUR2dkXZK2El7DCk+Wj8dV+r+QV74N2MV5/qjlOozP1qibpfB+aeK+Wx+cS6T6wbG/mK/Vp6cVJe+HOE6oo+qzbEyTi5M/RQg1HyAC+x1YBS+xI5KzsrD4BUdFmry06Bcg0FM+U//xu4lZERTIVfpvss3EhdFjt0h3nrVmIDPS3IvrnB9ZCt9lRNLPev9cpjuj4rB/fpz2obpXhJ79KpYAyv/78l9uP8ThOPZvEkPFems8tWM0f9CiUJiE3Ur6/bkA1HvIAOoNxx86IP63qgx9p1AIL18pd0iiJhOEBNTdYqp18FHRc75QUI6bTBOhi/xm5B2fT+yl2r1DyT73tTL4+Rh97lfiiIrRYEjzxSi4UqFu8pJawcdAyoAiO3rvNnKOox+2cazU+56TspdvGEuRj36J5lxowg88+UfeoAvVISfZ04f4bbZBflmP+kB3IExH/oPbe/0AsT9yHD9kwyyOFnuDXcpK1zYYAcbe4fbhSz/xI4LF4KFckbg6XASLz0B8qtxyh6KpLM8wFtjv4TPOw+92Tm4jdPE/qLENvffKrKkXgGB7aMcoIKmTw7ry/chY299DYPgQA2ncQXgMVV0TP+qcjZ7VJPqw+QAunbKO+0RvPOMUebDOw5l2+POsDaCKHeGOuVBzyhzMPANDo=
+  on:
+    tags: true
+    repo: TriPSs/redux-clazz
