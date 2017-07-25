@@ -39,6 +39,7 @@ import * as Selectors from './Selectors'
 
 export const mapStateToProps = state => ({
   ordinaryProp: Selectors.getOrdinaryProp(state),
+  ordinaryPropNoSelector: state.myReducer.ordinaryProp,
 })
 
 export default connect(mapStateToProps, { ...Actions })(OrdinaryClass)

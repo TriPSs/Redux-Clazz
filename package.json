@@ -15,6 +15,10 @@
     "email": "t.bokdam@seronaris.nl"
   },
   "main": "./index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/TriPSs/redux-clazz.git"
+  },
   "scripts": {
     "build": "babel src -d ./",
     "prepublish": "npm run build"
