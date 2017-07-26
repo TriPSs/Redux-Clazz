@@ -1,5 +1,4 @@
 import { createStore as createReduxStore, bindActionCreators } from 'redux'
-import ReduxClazz from './ReduxClazz'
 
 class Store {
 
