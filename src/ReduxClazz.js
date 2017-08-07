@@ -1,8 +1,4 @@
-export default class ReduxClazz {
-
-  props: {}
-
-  unMount: () => {}
+export default class {
 
   constructor(props, unMount) {
     this.props   = props
@@ -19,4 +15,5 @@ export default class ReduxClazz {
       ...nextProps
     }
   }
+
 }

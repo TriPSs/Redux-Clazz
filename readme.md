@@ -44,6 +44,9 @@ export const mapStateToProps = state => ({
 
 export default connect(mapStateToProps, { ...Actions })(OrdinaryClass)
 
+// To create a singleton
+export default connect(mapStateToProps, { ...Actions }, true)(OrdinaryClass)
+
 ```
 
 Finally, the class:
