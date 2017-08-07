@@ -1,71 +1,70 @@
 import { createStore as createReduxStore, bindActionCreators } from 'redux'
 
-class Store {
+export default new (class {
 
-  listeners = []
+    listeners = []
 
-  unSubscribe
+    unSubscribe
 
-  store = {}
+    store = {}
 
-  getStore = () => this.store
+    getStore = () => this.store
 
-  getState = () => this.store.getState()
+    getState = () => this.store.getState()
 
-  createStore = (...args) => {
-    this.store = createReduxStore(...args)
+    createStore = (...args) => {
+      this.store = createReduxStore(...args)
 
-    this.unSubscribe = this.store.subscribe(this.handleStoreUpdate)
+      this.unSubscribe = this.store.subscribe(this.handleStoreUpdate)
 
-    return this.store
-  }
-
-  connect = (mapStateToProps, mapDispatchToProps) => {
-    return (Clazz) => {
-      const props   = mapStateToProps !== null ? mapStateToProps(this.getState()) : {}
-      const actions = bindActionCreators(mapDispatchToProps, this.store.dispatch)
-
-      const clazz = new Clazz({
-        ...actions,
-        ...props,
-      }, () => this.removeListener(clazz.constructor.name))
-
-      this.listeners.push({
-        clazz          : clazz.constructor.name,
-        receiveProps   : clazz.receiveProps,
-        mapStateToProps: mapStateToProps !== null ? mapStateToProps : () => {},
-        props,
-      })
-
-      return clazz
+      return this.store
     }
-  }
 
-  handleStoreUpdate = () => {
-    const newState = this.getState()
+    connect = (mapStateToProps = null, mapDispatchToProps = null, singleton = false) => (Clazz) => {
+      const clazzWrapper = () => {
+        const props   = mapStateToProps !== null ? mapStateToProps(this.getState()) : {}
+        const actions = mapDispatchToProps !== null ? bindActionCreators(mapDispatchToProps, this.store.dispatch) : {}
 
-    this.listeners = this.listeners.map((listener) => {
-      const { mapStateToProps, props, receiveProps } = listener
-      const nextProps                                = mapStateToProps(newState)
+        const clazz = new Clazz({ ...actions, ...props }, () => this.removeListener(clazz.constructor.name))
 
-      if (JSON.stringify(nextProps) !== JSON.stringify(props)) {
-        receiveProps(nextProps)
+        this.listeners.push({
+          clazz          : clazz.constructor.name,
+          receiveProps   : clazz.receiveProps,
+          mapStateToProps: mapStateToProps !== null ? mapStateToProps : () => {},
+          props,
+        })
 
-        return {
-          ...listener,
-          props: { ...nextProps },
-        }
+        return clazz
       }
 
-      return listener
-    })
+      if (singleton) {
+        return new clazzWrapper()
+      }
+
+      return clazzWrapper
+    }
+
+    handleStoreUpdate = () => {
+      const newState = this.getState()
+
+      this.listeners = this.listeners.map((listener) => {
+        const { mapStateToProps, props, receiveProps } = listener
+        const nextProps                                = mapStateToProps(newState)
+
+        if (JSON.stringify(nextProps) !== JSON.stringify(props)) {
+          receiveProps(nextProps)
+
+          return {
+            ...listener,
+            props: { ...nextProps },
+          }
+        }
+
+        return listener
+      })
+    }
+
+    removeListener = (clazzToRemove) => this.listeners = this.listeners.filter(({ clazz }) => clazz !== clazzToRemove)
+
   }
-
-  removeListener = (clazzToRemove) => {
-    this.listeners = this.listeners.filter(({ clazz }) => clazz !== clazzToRemove)
-  }
-
-}
-
-export const StoreCreator = new Store()
-export default StoreCreator
+)()
